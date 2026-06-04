@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="fr" id="top">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Séance 19 · Prospection automatisée Gmail | DENEM Academy</title>
+<meta name="description" content="Support web séance 19 : construire une prospection automatisée Gmail avec Codex, OpenAI, VPS, relances et tracking.">
+<link rel="icon" href="logo-denem.jpeg">
+<style>
+:root{--ink:#111827;--muted:#4b5563;--line:#111827;--paper:#fff;--bg:#f8fafc;--cyan:#2dd4bf;--blue:#2563eb;--red:#ef4444;--orange:#f97316;--amber:#fef3c7;--green:#dcfce7;--lilac:#eef2ff;--soft:#f1f5f9;--shadow:7px 7px 0 #111827;--shadow-sm:4px 4px 0 #111827}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55;overflow-x:hidden}a{color:inherit}img{max-width:100%;height:auto}.progress{position:fixed;top:0;left:0;width:0;height:6px;background:linear-gradient(90deg,var(--cyan),var(--orange),var(--blue));z-index:60}.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);border-bottom:2px solid var(--line);backdrop-filter:blur(12px)}.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:13px 18px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brand img{width:38px;height:38px;object-fit:cover;border:2px solid var(--line);border-radius:8px;box-shadow:var(--shadow-sm)}.brand b{display:block;font-weight:950;text-transform:uppercase;letter-spacing:.04em;font-size:13px}.brand small{display:block;color:var(--muted);font:800 11px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em;margin-top:3px}.navlinks{display:flex;gap:8px;flex-wrap:wrap}.navlinks a,.badge,.copy-btn{border:2px solid var(--line);box-shadow:var(--shadow-sm);background:#fff;border-radius:6px;padding:8px 10px;font:900 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.1em;text-decoration:none}.navlinks a:hover{background:var(--cyan)}.hero{background:#fff;border-bottom:2px solid var(--line);position:relative}.hero:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(17,24,39,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(45,212,191,.13) 1px,transparent 1px);background-size:34px 34px;pointer-events:none}.wrap{max-width:1180px;margin:auto;padding:58px 18px}.hero-grid{position:relative;display:grid;grid-template-columns:1.02fr .98fr;gap:30px;align-items:center;padding-top:70px;padding-bottom:54px}.eyebrow,.kicker{display:inline-flex;width:max-content;max-width:100%;border:2px solid var(--line);box-shadow:var(--shadow-sm);border-radius:6px;background:var(--cyan);padding:8px 11px;font:950 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.1em}.hero h1{font-size:clamp(42px,7vw,88px);line-height:.92;margin:20px 0 18px;letter-spacing:0;font-weight:950}.hero h1 span{color:var(--blue)}.hero p{font-size:19px;line-height:1.75;color:#334155;max-width:760px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}.stat{border:2px solid var(--line);border-radius:8px;background:#fff;box-shadow:var(--shadow-sm);padding:16px}.stat:nth-child(1){background:var(--cyan)}.stat:nth-child(2){background:var(--amber)}.stat:nth-child(3){background:var(--lilac)}.stat b{display:block;font-size:28px;line-height:1}.stat span{display:block;margin-top:7px;font:900 11px/1.25 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;color:#374151}.media{margin:0;border:2px solid var(--line);border-radius:8px;box-shadow:var(--shadow);background:#fff;overflow:hidden}.media img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#eef2f7}.media.contain img{object-fit:contain}.media figcaption{border-top:2px solid var(--line);padding:11px 13px;font-size:13px;font-weight:800;color:#475569;background:#fff}.toc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.act{border:2px solid var(--line);border-radius:8px;box-shadow:var(--shadow-sm);background:#fff;text-decoration:none;padding:16px;min-height:132px}.act:nth-child(2n){background:var(--green)}.act:nth-child(3n){background:var(--amber)}.act:nth-child(4n){background:var(--lilac)}.act span{font:950 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--red);text-transform:uppercase;letter-spacing:.1em}.act b{display:block;margin:10px 0 8px;font-size:21px;line-height:1.12}.act p{margin:0;color:#475569;font-size:14px}.section{border-top:2px solid var(--line);scroll-margin-top:80px}.tone-1{background:#fff}.tone-2{background:#f0fdfa}.tone-3{background:#fff7ed}.tone-4{background:#eef2ff}.tone-5{background:#f8fafc}.tone-6{background:#fefce8}.section:nth-of-type(7n){background:#f0fdf4}.layout{display:grid;gap:28px;align-items:start}.layout>*{min-width:0}.layout-story{grid-template-columns:1fr 1fr}.layout-image{grid-template-columns:.9fr 1.1fr;align-items:center}.layout-cards,.layout-prompt,.layout-table,.layout-flow,.layout-final{grid-template-columns:1fr}.layout-quote{grid-template-columns:.9fr 1.1fr;align-items:stretch}.layout-command,.layout-check,.layout-compare{grid-template-columns:.95fr 1.05fr}.section-copy,.panel,.prompt-card,.code-card,.media,.table-wrap,.quote,.final-card{max-width:100%}.section-copy,.panel{border:2px solid var(--line);box-shadow:var(--shadow);border-radius:8px;background:#fff;padding:26px}.section-copy h2{font-size:clamp(31px,4.4vw,58px);line-height:1;margin:14px 0 15px;font-weight:950;letter-spacing:0;overflow-wrap:anywhere}.section-copy p{font-size:18px;line-height:1.75;color:#334155;margin:0;overflow-wrap:anywhere}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}.card{border:2px solid var(--line);border-radius:8px;box-shadow:var(--shadow-sm);background:#fff;padding:17px;overflow-wrap:anywhere}.card:nth-child(1){background:var(--cyan)}.card:nth-child(2){background:var(--amber)}.card:nth-child(3){background:var(--green)}.card:nth-child(4){background:var(--lilac)}.card b{font-size:18px;display:block;margin-bottom:7px}.card p{margin:0;color:#374151;font-weight:750}.prompt-card,.code-card{border:2px solid var(--line);border-radius:8px;box-shadow:var(--shadow);background:#111827;color:#f8fafc;overflow:hidden}.prompt-head{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#0f172a;border-bottom:2px solid rgba(255,255,255,.18);padding:10px 12px}.prompt-head span{font:950 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.12em;color:#99f6e4}.copy-btn{cursor:pointer}.copy-btn.copied{background:var(--cyan)}pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font:650 13px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace}.prompt-card pre{padding:18px;max-height:620px;overflow:auto}.code-card pre{padding:20px}.table-wrap{overflow:auto;border:2px solid var(--line);border-radius:8px;box-shadow:var(--shadow);background:#fff}table{width:100%;border-collapse:collapse;min-width:680px}th,td{border-bottom:1px solid #d1d5db;padding:14px;text-align:left;vertical-align:top}th{background:#111827;color:#fff;font:950 12px/1.2 ui-monospace,SFMono-Regular,Menlo,monospace;text-transform:uppercase;letter-spacing:.09em}td{color:#374151;font-weight:700}.checklist{display:grid;gap:12px;list-style:none;margin:0;padding:0}.checklist li{display:grid;grid-template-columns:46px 1fr;gap:12px;align-items:center;border:2px solid var(--line);box-shadow:var(--shadow-sm);border-radius:8px;background:#fff;padding:13px}.checklist li:nth-child(2n){background:var(--green)}.checklist li:nth-child(3n){background:var(--amber)}.checklist span,.timeline span{display:grid;place-items:center;width:38px;height:38px;border-radius:6px;border:2px solid var(--line);background:#111827;color:#fff;font:900 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace}.checklist p{margin:0;font-weight:820;color:#374151}.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.flow span{border:2px solid var(--line);box-shadow:var(--shadow-sm);border-radius:999px;background:#fff;padding:11px 15px;font:900 13px/1 ui-monospace,SFMono-Regular,Menlo,monospace}.flow span:nth-child(2n){background:var(--cyan)}.flow span:nth-child(3n){background:var(--amber)}.quote{margin:0;border:2px solid var(--line);box-shadow:var(--shadow);border-radius:8px;background:#111827;color:#fff;padding:32px;display:flex;align-items:center;min-height:230px}.quote p{margin:0;font-size:clamp(25px,4vw,46px);font-weight:950;line-height:1.08;overflow-wrap:anywhere}.compare{display:grid;grid-template-columns:1fr 1fr;gap:14px}.compare div{border:2px solid var(--line);border-radius:8px;box-shadow:var(--shadow-sm);background:#fff;padding:18px}.compare div:first-child{background:#fee2e2}.compare div:last-child{background:var(--green)}.timeline{display:grid;gap:12px}.timeline article{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:center;border:2px solid var(--line);box-shadow:var(--shadow-sm);border-radius:8px;background:#fff;padding:14px}.final-card{border:2px solid var(--line);box-shadow:var(--shadow);border-radius:8px;background:#111827;color:#fff;padding:30px}.final-card h2{font-size:clamp(34px,6vw,70px);line-height:.96;margin:0 0 20px;overflow-wrap:anywhere}.final-card ul{margin:0;padding-left:20px;font-size:18px;line-height:1.75}.footer{border-top:2px solid var(--line);background:#111827;color:#fff}.footer .wrap{padding-top:32px;padding-bottom:32px}.footer p{margin:0;color:#cbd5e1}.reveal{opacity:0;transform:translateY(18px);transition:opacity .45s ease,transform .45s ease}.reveal.visible{opacity:1;transform:none}@media(max-width:980px){.nav{align-items:flex-start;flex-direction:column}.navlinks{display:none}.hero-grid,.layout-story,.layout-image,.layout-quote,.layout-command,.layout-check,.layout-compare{grid-template-columns:1fr}.toc{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:1fr}.compare{grid-template-columns:1fr}}@media(max-width:620px){.wrap{padding:44px 14px}.hero-grid{padding-top:48px}.toc{grid-template-columns:1fr}.brand small{font-size:10px}.hero h1{font-size:clamp(38px,12vw,58px);line-height:1}.section-copy,.panel{padding:21px}.section-copy p,.hero p{font-size:16px}.quote{padding:24px}.media img{aspect-ratio:4/3}.prompt-card pre,.code-card pre{font-size:12px;padding:15px}table,thead,tbody,tr,th,td{display:block;min-width:0;width:100%}thead{display:none}tr{border-bottom:2px solid var(--line)}td{border:0;padding:12px 14px}.checklist li,.timeline article{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<nav class="topbar"><div class="nav"><a class="brand" href="#top"><img src="logo-denem.jpeg" alt="Logo DENEM"><span><b>DENEM Academy</b><small>Séance 19 · Prospection automatisée</small></span></a><div class="navlinks"><a href="#section-01">Objectif</a><a href="#section-11">Audit</a><a href="#section-21">Accès</a><a href="#section-31">Config</a><a href="#section-41">VPS</a><a href="#section-51">Moteur</a><a href="#section-61">Tests</a><a href="#section-71">Production</a></div></div></nav>
+<header class="hero"><div class="wrap hero-grid"><div class="reveal"><span class="eyebrow">Acte 3 · Système Gmail + VPS</span><h1>Prospection automatisée.<br><span>10 emails par jour, sous contrôle.</span></h1><p>Je transforme la base `leads-prospection-ready.xlsx` en système concret : audit, configuration privée, Gmail, OpenAI, VPS, tracking, relances et correction du style des emails.</p><div class="stats"><div class="stat"><b>80</b><span>sections guidées</span></div><div class="stat"><b>22</b><span>captures de séance</span></div><div class="stat"><b>6</b><span>prompts copiables</span></div></div></div><figure class="media contain reveal"><img src="assets/screenshots/01-dossier-prospection-ready.jpg" alt="Le point de départ : le dossier PROSPECTION_READY." loading="lazy"><figcaption>Le point de départ : le dossier PROSPECTION_READY.</figcaption></figure></div></header>
+<section class="section tone-5"><div class="wrap"><div class="toc"><a class="act reveal" href="#section-01"><span>Sections 01-10</span><b>Comprendre la séance</b><p>Je pars de la base prête et je pose la logique : peu d’emails, mais propres.</p></a><a class="act reveal" href="#section-11"><span>Sections 11-20</span><b>Auditer le XLSX</b><p>Je bloque l’automatisation tant que le fichier n’est pas prouvé exploitable.</p></a><a class="act reveal" href="#section-21"><span>Sections 21-30</span><b>Préparer les accès</b><p>Je récupère Gmail, OpenAI, Hostinger et je range tout sans exposer les secrets.</p></a><a class="act reveal" href="#section-31"><span>Sections 31-40</span><b>Structurer la config</b><p>Je transforme le vrac en `env`, `deploy.env` et règles Git propres.</p></a><a class="act reveal" href="#section-41"><span>Sections 41-50</span><b>Déployer le VPS</b><p>Je copie la base, installe l’arborescence et prépare le moteur Python.</p></a><a class="act reveal" href="#section-51"><span>Sections 51-60</span><b>Construire le moteur</b><p>Je relie XLSX, OpenAI, Gmail SMTP/IMAP, SQLite, relances et limites.</p></a><a class="act reveal" href="#section-61"><span>Sections 61-70</span><b>Tester et corriger</b><p>Je teste vraiment, puis je refuse les emails mous ou génériques.</p></a><a class="act reveal" href="#section-71"><span>Sections 71-80</span><b>Industrialiser</b><p>Je garde le système maintenable, monétisable et réutilisable client.</p></a></div></div></section>
+<main>
+<section id="section-01" class="section tone-2" data-section="1"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">01 · Objectif</p><h2>01. Je construis une machine de prospection réelle</h2><p>Je ne fais pas un exercice théorique. Je pars d’une base de leads déjà nettoyée et je crée un système qui peut envoyer via Gmail, suivre les réponses et relancer avec prudence.</p><div class="stats"><div class="stat"><b>10 emails/jour</b><span>repère</span></div><div class="stat"><b>Gmail + OpenAI</b><span>repère</span></div><div class="stat"><b>VPS 24/7</b><span>repère</span></div></div></div><figure class="media contain reveal"><img src="assets/screenshots/01-dossier-prospection-ready.jpg" alt="Le dossier de la séance part du fichier PROSPECTION_READY." loading="lazy"><figcaption>Le dossier de la séance part du fichier PROSPECTION_READY.</figcaption></figure></div></section><section id="section-02" class="section tone-3" data-section="2"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">02 · Continuité</p><h2>02. La séance 19 arrive après la base propre</h2><p>Google Maps, Apify, Data.gouv et le nettoyage CRM ont servi à une chose : créer un fichier assez fiable pour automatiser sans faire n’importe quoi.</p></div><div class="cards reveal"><article class="card"><b>Google Maps </b><p>Google Maps : trouver des leads</p></article><article class="card"><b>Apify </b><p>Apify : enrichir les contacts</p></article><article class="card"><b>Data.gouv </b><p>Data.gouv : consolider les données légales</p></article><article class="card"><b>Séance 18 </b><p>Séance 18 : nettoyer, scorer, segmenter</p></article></div></div></section><section id="section-03" class="section tone-4" data-section="3"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">03 · Point de départ</p><h2>03. Le fichier source passe avant le système</h2><p>Je ne demande pas à Codex d’envoyer des emails depuis un dossier ambigu. Je lui donne un seul fichier officiel : `leads-prospection-ready.xlsx`.</p></div><figure class="media contain reveal"><img src="assets/screenshots/01-dossier-prospection-ready.jpg" alt="Le fichier officiel doit être facile à retrouver." loading="lazy"><figcaption>Le fichier officiel doit être facile à retrouver.</figcaption></figure></div></section><section id="section-04" class="section tone-5" data-section="4"><div class="wrap layout layout-quote"><div class="section-copy reveal"><p class="kicker">04 · Garde-fou</p><h2>04. La règle : pas d’envoi avant audit</h2><p>Un système d’envoi branché sur une mauvaise base devient dangereux. Je vérifie d’abord les onglets, les colonnes, les statuts et les exclusions.</p></div><blockquote class="quote reveal"><p>Un mauvais fichier peut transformer une bonne automatisation en problème commercial.</p></blockquote></div></section><section id="section-05" class="section tone-6" data-section="5"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">05 · Cadence</p><h2>05. Je limite volontairement le volume</h2><p>Je pars sur une cadence prudente : dix sorties maximum par jour, relances incluses. L’objectif est de tester la qualité, pas de brûler le compte Gmail.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Réglage</th><th>Valeur</th><th>Pourquoi</th></tr></thead><tbody><tr><td>DAILY_SEND_LIMIT</td><td>10</td><td>Limiter le risque et contrôler la qualité</td></tr><tr><td>Fenêtre d’envoi</td><td>09:30-11:30</td><td>Garder un comportement humain</td></tr><tr><td>Week-end</td><td>off</td><td>Ne pas envoyer quand le contexte est mauvais</td></tr></tbody></table></div></div></section><section id="section-06" class="section tone-1" data-section="6"><div class="wrap layout layout-flow"><div class="section-copy reveal"><p class="kicker">06 · Compétence IA</p><h2>06. Le vrai apprentissage : créer un système</h2><p>Ce que tu dois retenir dépasse Gmail. Tu apprends à transformer une idée en architecture : contexte, contraintes, fichiers, tests, production.</p></div><div class="flow reveal"><span>Idée</span><span>Prompt cadré</span><span>Codex exécute</span><span>Je teste</span><span>Je corrige</span><span>Je rends réutilisable</span></div></div></section><section id="section-07" class="section tone-2" data-section="7"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">07 · Business</p><h2>07. Je veux un système vendable</h2><p>Ce type d’automatisation peut être facturé cher si elle est fiable : elle remplace une suite d’outils bricolés par un moteur simple, maintenable et contrôlé.</p></div><div class="cards reveal"><article class="card"><b>Un VPS dédié au client</b><p>Un VPS dédié au client</p></article><article class="card"><b>Une base XLSX propre</b><p>Une base XLSX propre</p></article><article class="card"><b>Des relances automatiques</b><p>Des relances automatiques</p></article><article class="card"><b>Un tracking exportable</b><p>Un tracking exportable</p></article><article class="card"><b>Une limite quotidienne claire</b><p>Une limite quotidienne claire</p></article></div></div></section><section id="section-08" class="section tone-3" data-section="8"><div class="wrap layout layout-compare"><div class="section-copy reveal"><p class="kicker">08 · Méthode</p><h2>08. Je ne veux pas une boucle infinie</h2><p>Le mauvais réflexe : demander, regarder, corriger, recommencer sans fin. Le bon réflexe : donner assez de contexte dès le début pour réduire les allers-retours.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Avant</th><th>Après</th></tr></thead><tbody><tr><td>Prompt vague puis corrections sans fin</td><td>Prompt complet avec fichiers, contraintes et sortie attendue</td></tr><tr><td>Le modèle improvise</td><td>Codex sait quoi lire et quoi refuser</td></tr><tr><td>Tu subis le résultat</td><td>Tu pilotes le système</td></tr></tbody></table></div></div></section><section id="section-09" class="section tone-4" data-section="9"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">09 · Terminal</p><h2>09. La commande Codex est lancée dans le bon dossier</h2><p>Je lance Codex dans `06-leads`, parce que le dossier courant détermine ce que l’agent peut lire, créer et vérifier.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>cd ~/Desktop/mon-business/06-leads
+codex --dangerously-bypass-approvals-and-sandbox</code></pre></div></div></section><section id="section-10" class="section tone-5" data-section="10"><div class="wrap layout layout-check"><div class="section-copy reveal"><p class="kicker">10 · Checklist</p><h2>10. Ce que tu dois avoir avant de continuer</h2><p>Si un seul élément manque, tu t’arrêtes et tu corriges. La suite dépend de ces fondations.</p></div><ul class="checklist reveal"><li><span>01</span><p>Le XLSX officiel existe</p></li><li><span>02</span><p>Le dossier de session est le bon</p></li><li><span>03</span><p>Codex est lancé dans ce dossier</p></li><li><span>04</span><p>Tu n’as pas collé de secret dans le prompt</p></li><li><span>05</span><p>Tu sais quel compte Gmail va envoyer</p></li></ul></div></section><section id="section-11" class="section tone-6" data-section="11"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">11 · Audit</p><h2>11. J’ouvre par un audit technique</h2><p>Je demande à Codex de prouver que le classeur peut servir à un moteur Gmail. Ce n’est pas une vérification cosmétique : c’est un contrôle bloquant.</p></div><figure class="media contain reveal"><img src="assets/screenshots/02-codex-audit-prompt.jpg" alt="Le premier prompt audite, il n’envoie rien." loading="lazy"><figcaption>Le premier prompt audite, il n’envoie rien.</figcaption></figure></div></section><section id="section-12" class="section tone-1" data-section="12"><div class="wrap layout layout-prompt"><div class="section-copy reveal"><p class="kicker">12 · Prompt</p><h2>12. Prompt à copier : audit avant automatisation</h2><p>Ce prompt sert à vérifier le fichier et à produire un diagnostic clair avant tout envoi.</p></div><div class="prompt-card reveal"><div class="prompt-head"><span>Prompt à copier</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Tu es Codex. Fais un audit technique complet du fichier de prospection avant toute automatisation.
+
+FICHIER OFFICIEL À ANALYSER
+/Users/fort/Desktop/mon-business/06-leads/PROSPECTION_READY/01-BASE-EXCEL-A-UTILISER/leads-prospection-ready.xlsx
+
+MISSION
+Tu dois vérifier que ce fichier peut être utilisé par un système d&#x27;envoi automatique Gmail.
+Tu ne dois envoyer aucun email.
+Tu ne dois créer aucun système d&#x27;envoi à cette étape.
+Tu dois uniquement auditer le fichier et produire un diagnostic clair.
+
+CONTRAINTES
+- Ne modifie pas le XLSX source.
+- Ne supprime aucune ligne.
+- Ne lance aucun outil d&#x27;envoi.
+- Si un problème critique existe, stoppe et explique quoi corriger.
+
+VÉRIFICATIONS OBLIGATOIRES
+1. Vérifie que le fichier existe et s&#x27;ouvre avec openpyxl.
+2. Liste tous les onglets disponibles.
+3. Vérifie la présence des onglets utiles :
+   - MASTER_CRM
+   - READY_FOR_EMAIL
+   - OUTREACH_QUEUE
+   - DO_NOT_CONTACT
+   - MANUAL_REVIEW si présent
+4. Vérifie les colonnes nécessaires dans OUTREACH_QUEUE :
+   - lead_id_final
+   - company_name
+   - primary_email
+   - final_class
+   - quality_status
+   - outreach_segment
+   - final_next_action
+   - campaign_status ou status
+   - opt_out_status si présent
+   - notes
+5. Compte :
+   - total lignes MASTER_CRM
+   - total READY_FOR_EMAIL
+   - total OUTREACH_QUEUE
+   - lignes A+
+   - lignes A
+   - lignes sans email
+   - lignes DO_NOT_CONTACT
+   - lignes en manual review
+6. Vérifie que OUTREACH_QUEUE ne contient pas :
+   - DO_NOT_CONTACT
+   - opt_out_status rempli
+   - bounced
+   - replied
+   - sent
+   - email vide
+   - email invalide
+7. Vérifie les doublons par :
+   - primary_email
+   - domain
+   - company_name + city
+8. Vérifie que chaque ligne garde une source :
+   - source_files
+   - source_urls
+   - ou équivalent
+
+SORTIES À CRÉER
+Dans :
+/Users/fort/Desktop/mon-business/06-leads/PROSPECTION_READY/02-AUDIT-AVANT-AUTOMATISATION/
+
+Crée :
+- audit-prospection-ready.md
+- audit-prospection-ready.csv
+
+FORMAT DU RAPPORT
+Le rapport doit dire :
+- fichier analysé
+- onglets trouvés
+- colonnes manquantes
+- nombre de leads exploitables
+- nombre de leads exclus
+- risques détectés
+- décision finale : READY ou BLOCKED
+
+MESSAGE FINAL
+Réponds seulement :
+&quot;Audit terminé.
+Décision : READY ou BLOCKED
+Leads email exploitables : X
+Lignes OUTREACH_QUEUE : Y
+Risques critiques : Z
+Rapport : audit-prospection-ready.md&quot;</code></pre></div></div></section><section id="section-13" class="section tone-2" data-section="13"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">13 · XLSX</p><h2>13. Les onglets attendus ne sont pas décoratifs</h2><p>Chaque onglet a un rôle. `MASTER_CRM` garde la base, `READY_FOR_EMAIL` prépare les contacts, `OUTREACH_QUEUE` sert à l’envoi, `DO_NOT_CONTACT` protège les exclusions.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Onglet</th><th>Rôle</th></tr></thead><tbody><tr><td>MASTER_CRM</td><td>Base finale dédupliquée</td></tr><tr><td>READY_FOR_EMAIL</td><td>Contacts avec email exploitable</td></tr><tr><td>OUTREACH_QUEUE</td><td>File d’attente triée pour la campagne</td></tr><tr><td>DO_NOT_CONTACT</td><td>Tout ce qui ne doit jamais partir</td></tr><tr><td>MANUAL_REVIEW</td><td>Cas à vérifier à la main</td></tr></tbody></table></div></div></section><section id="section-14" class="section tone-3" data-section="14"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">14 · Colonnes</p><h2>14. Je vérifie les colonnes qui pilotent l’envoi</h2><p>Une ligne sans statut ou sans action finale n’est pas prête. Le système doit savoir quoi envoyer, à qui, pourquoi, et ce qu’il faut éviter.</p></div><div class="cards reveal"><article class="card"><b>lead_id_final</b><p>lead_id_final</p></article><article class="card"><b>company_name</b><p>company_name</p></article><article class="card"><b>primary_email</b><p>primary_email</p></article><article class="card"><b>quality_status</b><p>quality_status</p></article><article class="card"><b>outreach_segment</b><p>outreach_segment</p></article><article class="card"><b>final_next_action</b><p>final_next_action</p></article><article class="card"><b>campaign_status</b><p>campaign_status</p></article><article class="card"><b>opt_out_status</b><p>opt_out_status</p></article></div></div></section><section id="section-15" class="section tone-4" data-section="15"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">15 · Décision</p><h2>15. Le rapport peut bloquer la suite</h2><p>Dans la séance, l’audit conclut `BLOCKED`. Ce n’est pas un échec : c’est exactement ce que je veux si un risque critique existe.</p></div><figure class="media contain reveal"><img src="assets/screenshots/03-audit-blocked-result.jpg" alt="Le rapport donne une décision claire : READY ou BLOCKED." loading="lazy"><figcaption>Le rapport donne une décision claire : READY ou BLOCKED.</figcaption></figure></div></section><section id="section-16" class="section tone-5" data-section="16"><div class="wrap layout layout-quote"><div class="section-copy reveal"><p class="kicker">16 · Prudence</p><h2>16. READY ne veut pas dire envoyer tout de suite</h2><p>Même si le fichier est bon, je ne lance pas la campagne. Je passe d’abord par la configuration, le déploiement, les tests et l’amélioration du message.</p></div><blockquote class="quote reveal"><p>Automatiser vite ne doit jamais remplacer vérifier lentement.</p></blockquote></div></section><section id="section-17" class="section tone-6" data-section="17"><div class="wrap layout layout-check"><div class="section-copy reveal"><p class="kicker">17 · Sécurité données</p><h2>17. Les exclusions doivent rester exclues</h2><p>Je refuse que `DO_NOT_CONTACT`, opt-out, bounced, replied ou email invalide se retrouvent dans la file. C’est une règle de protection commerciale.</p></div><ul class="checklist reveal"><li><span>01</span><p>Pas de DO_NOT_CONTACT dans OUTREACH_QUEUE</p></li><li><span>02</span><p>Pas d’email vide</p></li><li><span>03</span><p>Pas de bounced</p></li><li><span>04</span><p>Pas de replied</p></li><li><span>05</span><p>Pas d’opt-out</p></li><li><span>06</span><p>Pas d’adresse invalide</p></li></ul></div></section><section id="section-18" class="section tone-1" data-section="18"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">18 · Diagnostic</p><h2>18. Je compte avant de coder</h2><p>Les volumes donnent le niveau de risque : nombre de leads email, nombre de lignes dans la queue, doublons, lignes A+, lignes A, anomalies.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Mesure</th><th>Question terrain</th></tr></thead><tbody><tr><td>Leads email exploitables</td><td>Combien peuvent partir ?</td></tr><tr><td>OUTREACH_QUEUE</td><td>Quelle file le moteur va lire ?</td></tr><tr><td>Risques critiques</td><td>Qu’est-ce qui bloque ?</td></tr><tr><td>Doublons</td><td>Est-ce que je risque de contacter deux fois ?</td></tr></tbody></table></div></div></section><section id="section-19" class="section tone-2" data-section="19"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">19 · Contrainte</p><h2>19. Je garde le XLSX source intact</h2><p>Le prompt interdit de modifier le fichier source. Codex peut lire, auditer et produire des rapports, mais il ne touche pas à la base officielle.</p></div><div class="cards reveal"><article class="card"><b>Ne modifie pas le XLSX</b><p>Ne modifie pas le XLSX</p></article><article class="card"><b>Ne supprime aucune ligne</b><p>Ne supprime aucune ligne</p></article><article class="card"><b>Ne lance aucun outil d’envoi</b><p>Ne lance aucun outil d’envoi</p></article><article class="card"><b>Explique quoi corriger si c’est bloqué</b><p>Explique quoi corriger si c’est bloqué</p></article></div></div></section><section id="section-20" class="section tone-3" data-section="20"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">20 · Sortie</p><h2>20. Le résultat attendu de l’audit</h2><p>Je veux une réponse courte qui dit quoi faire ensuite. Pas un roman, pas une promesse : décision, chiffres, risques, rapport.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Audit terminé.
+Décision : READY ou BLOCKED
+Leads email exploitables : X
+Lignes OUTREACH_QUEUE : Y
+Risques critiques : Z
+Rapport : audit-prospection-ready.md</code></pre></div></div></section><section id="section-21" class="section tone-4" data-section="21"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">21 · Accès</p><h2>21. Je prépare Gmail, OpenAI et le VPS</h2><p>Après l’audit, je réunis les trois briques qui feront tourner le système : un compte Gmail, une clé OpenAI, un serveur Hostinger.</p></div><div class="cards reveal"><article class="card"><b>Gmail </b><p>Gmail : envoyer et lire les réponses</p></article><article class="card"><b>OpenAI </b><p>OpenAI : rédiger les messages</p></article><article class="card"><b>VPS </b><p>VPS : faire tourner le moteur 24/7</p></article><article class="card"><b>SQLite </b><p>SQLite : mémoriser les statuts</p></article></div></div></section><section id="section-22" class="section tone-5" data-section="22"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">22 · Gmail</p><h2>22. Si App Passwords est indisponible, je sais pourquoi</h2><p>Google affiche parfois que le paramètre n’est pas disponible. La raison la plus simple : la validation en deux étapes n’est pas activée.</p></div><figure class="media contain reveal"><img src="assets/screenshots/04-google-app-password-unavailable.jpg" alt="Sans 2FA, le mot de passe d’application n’apparaît pas." loading="lazy"><figcaption>Sans 2FA, le mot de passe d’application n’apparaît pas.</figcaption></figure></div></section><section id="section-23" class="section tone-6" data-section="23"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">23 · Compte</p><h2>23. Je sélectionne le bon compte Google</h2><p>Petit piège : Google peut te renvoyer sur le mauvais compte. Je vérifie l’adresse affichée avant de créer quoi que ce soit.</p></div><figure class="media contain reveal"><img src="assets/screenshots/05-google-account-security.jpg" alt="La page compte Google sert à revenir au bon profil." loading="lazy"><figcaption>La page compte Google sert à revenir au bon profil.</figcaption></figure></div></section><section id="section-24" class="section tone-1" data-section="24"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">24 · 2FA</p><h2>24. J’active la validation en deux étapes</h2><p>Je vais dans Sécurité et connexion, puis Validation en deux étapes. Sans cette étape, Gmail ne donnera pas de mot de passe d’application.</p></div><figure class="media contain reveal"><img src="assets/screenshots/06-validation-deux-etapes.jpg" alt="L’activation 2FA débloque la suite." loading="lazy"><figcaption>L’activation 2FA débloque la suite.</figcaption></figure></div></section><section id="section-25" class="section tone-2" data-section="25"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">25 · Confirmation</p><h2>25. Je valide que la 2FA est bien active</h2><p>Le message de confirmation est important : maintenant le compte peut générer un mot de passe d’application pour l’automatisation.</p></div><figure class="media contain reveal"><img src="assets/screenshots/07-2fa-activee.jpg" alt="Une fois protégé, le compte autorise la création d’un accès applicatif." loading="lazy"><figcaption>Une fois protégé, le compte autorise la création d’un accès applicatif.</figcaption></figure></div></section><section id="section-26" class="section tone-3" data-section="26"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">26 · App password</p><h2>26. Je crée le mot de passe d’application</h2><p>Je nomme l’application simplement, par exemple `prospection`. Le mot de passe obtenu va dans la configuration privée, jamais dans le prompt public.</p></div><figure class="media contain reveal"><img src="assets/screenshots/08-app-password-form.jpg" alt="Le nom de l’application permet de reconnaître l’usage plus tard." loading="lazy"><figcaption>Le nom de l’application permet de reconnaître l’usage plus tard.</figcaption></figure></div></section><section id="section-27" class="section tone-4" data-section="27"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">27 · OpenAI</p><h2>27. Je crée une clé OpenAI dédiée</h2><p>Je préfère une clé dédiée à la campagne. Si je dois couper le système, je révoque cette clé sans toucher aux autres projets.</p></div><figure class="media contain reveal"><img src="assets/screenshots/13-api-key-modal.jpg" alt="La clé est dédiée au projet de prospection." loading="lazy"><figcaption>La clé est dédiée au projet de prospection.</figcaption></figure></div></section><section id="section-28" class="section tone-5" data-section="28"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">28 · VPS</p><h2>28. Je récupère les informations Hostinger</h2><p>J’utilise le même VPS que le blog automatique pour éviter de racheter un serveur. Il me faut l’IP, l’utilisateur SSH, le port et la clé.</p></div><figure class="media contain reveal"><img src="assets/screenshots/11-hostinger-vps-settings.jpg" alt="Le VPS devient l’endroit où le moteur tourne." loading="lazy"><figcaption>Le VPS devient l’endroit où le moteur tourne.</figcaption></figure></div></section><section id="section-29" class="section tone-6" data-section="29"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">29 · SSH</p><h2>29. Je protège les infos SSH</h2><p>Les infos Hostinger sont utiles mais sensibles. Je peux les coller en vrac dans un fichier local, puis laisser Codex extraire sans afficher les valeurs.</p></div><figure class="media contain reveal"><img src="assets/screenshots/12-hostinger-ssh-keys.jpg" alt="Les zones sensibles sont masquées avant publication." loading="lazy"><figcaption>Les zones sensibles sont masquées avant publication.</figcaption></figure></div></section><section id="section-30" class="section tone-1" data-section="30"><div class="wrap layout layout-quote"><div class="section-copy reveal"><p class="kicker">30 · Secrets</p><h2>30. La règle sécurité : jamais de secret dans la réponse</h2><p>Codex peut lire localement des fichiers privés si tu lui donnes la mission. Mais il ne doit jamais afficher le contenu de `env`, `deploy.env` ou du fichier brut.</p></div><blockquote class="quote reveal"><p>Le bon agent sait utiliser un secret sans le répéter.</p></blockquote></div></section><section id="section-31" class="section tone-2" data-section="31"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">31 · Vrac utile</p><h2>31. Je colle tout en vrac dans un fichier local</h2><p>Le vrac est acceptable si le prompt est strict. Je mets Gmail, OpenAI, contexte business, offre, calendrier et infos Hostinger dans un fichier temporaire.</p></div><figure class="media contain reveal"><img src="assets/screenshots/10-fichier-txt-local.jpg" alt="Un fichier texte temporaire centralise les infos à extraire." loading="lazy"><figcaption>Un fichier texte temporaire centralise les infos à extraire.</figcaption></figure></div></section><section id="section-32" class="section tone-3" data-section="32"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">32 · Mini prompt</p><h2>32. Je demande à Codex de créer le fichier texte</h2><p>Quand le fichier n’existe pas, je ne le crée pas à la main si Codex peut le faire dans le dossier courant.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Créer moi un fichier txt plz</code></pre></div></div></section><section id="section-33" class="section tone-4" data-section="33"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">33 · Extraction</p><h2>33. Je fais remplir les variables automatiquement</h2><p>Je donne le chemin du fichier et je demande à Codex de remplir `env` et `deploy.env` sans afficher les valeurs.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>/Users/fort/Desktop/mon-business/06-leads/fichier.txt
+lis le fichier txt et remplis les variables env stp</code></pre></div></div></section><section id="section-34" class="section tone-5" data-section="34"><div class="wrap layout layout-prompt"><div class="section-copy reveal"><p class="kicker">34 · Prompt</p><h2>34. Prompt à copier : organiser la configuration privée</h2><p>Ce prompt transforme le vrac en fichiers propres et ignore les données inutiles Hostinger.</p></div><div class="prompt-card reveal"><div class="prompt-head"><span>Prompt à copier</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Tu es Codex. Organise une configuration privée collée en vrac pour une automatisation Gmail sur VPS.
+
+IMPORTANT SÉCURITÉ
+Le fichier 00-colle-tout-ici.txt peut contenir des secrets.
+Tu dois le lire localement, mais tu ne dois jamais afficher son contenu.
+Tu ne dois jamais faire cat 00-colle-tout-ici.txt.
+Tu ne dois jamais faire cat env.
+Tu ne dois jamais faire cat deploy.env.
+Tu dois retourner seulement les champs trouvés ou manquants, sans afficher les valeurs.
+
+DOSSIER LOCAL
+Travaille uniquement dans le dossier courant où Codex a été lancé.
+Utilise le dossier courant comme dossier de session.
+Ne crée pas un nouveau sous-dossier pour la configuration.
+
+FICHIER PRIVÉ SOURCE
+./00-colle-tout-ici.txt
+
+Ce fichier peut contenir en vrac :
+- clé OpenAI
+- email Gmail
+- mot de passe d&#x27;application Gmail
+- nom d&#x27;expéditeur
+- email de test
+- contexte business
+- offre proposée
+- lien Calendly ou RDV
+- texte brut copié depuis Hostinger
+- IP VPS
+- user SSH
+- commande ssh root@...
+- hostname VPS
+- informations inutiles Hostinger à ignorer
+
+FICHIERS À PRODUIRE
+- env
+- deploy.env
+- README-CONFIG.md
+- .gitignore
+
+EXTRACTION À FAIRE
+Depuis 00-colle-tout-ici.txt, détecte :
+- OPENAI_API_KEY si une valeur commence par sk-
+- GMAIL_EMAIL si une adresse email est fournie
+- GMAIL_APP_PASSWORD si un mot de passe Gmail d&#x27;application est fourni
+- GMAIL_SENDER_NAME si un nom ou prénom est fourni
+- TEST_RECIPIENT_EMAIL si une adresse de test est fournie
+- BUSINESS_CONTEXT si une description business est fournie
+- OFFER_SUMMARY si une offre est fournie
+- CALENDAR_LINK si un lien de RDV est fourni
+- VPS_IP depuis IPv4 ou depuis une commande ssh root@IP
+- SSH_USER depuis Nom d&#x27;utilisateur SSH ou ssh USER@IP
+- SSH_PORT, mets 22 par défaut si absent
+- SSH_KEY_PATH, mets ~/.ssh/blog-auto-codex par défaut si absent
+
+Crée env avec :
+OPENAI_API_KEY=&quot;valeur extraite ou vide&quot;
+OPENAI_MODEL=&quot;gpt-4.1-mini&quot;
+GMAIL_EMAIL=&quot;valeur extraite ou vide&quot;
+GMAIL_APP_PASSWORD=&quot;valeur extraite ou vide sans espaces&quot;
+GMAIL_SENDER_NAME=&quot;valeur extraite ou vide&quot;
+SMTP_HOST=&quot;smtp.gmail.com&quot;
+SMTP_PORT=&quot;587&quot;
+IMAP_HOST=&quot;imap.gmail.com&quot;
+IMAP_PORT=&quot;993&quot;
+DAILY_SEND_LIMIT=&quot;10&quot;
+SEND_WINDOW_START=&quot;09:30&quot;
+SEND_WINDOW_END=&quot;11:30&quot;
+TIMEZONE=&quot;Europe/Paris&quot;
+ALLOW_WEEKEND_SENDS=&quot;false&quot;
+FOLLOWUP_1_DAYS=&quot;3&quot;
+FOLLOWUP_2_DAYS=&quot;7&quot;
+FOLLOWUP_3_DAYS=&quot;14&quot;
+CAMPAIGN_NAME=&quot;prospection-simple&quot;
+BUSINESS_CONTEXT=&quot;valeur extraite ou vide&quot;
+OFFER_SUMMARY=&quot;valeur extraite ou vide&quot;
+CALENDAR_LINK=&quot;valeur extraite ou vide&quot;
+TEST_RECIPIENT_EMAIL=&quot;valeur extraite ou vide&quot;
+DRY_RUN=&quot;true&quot;
+SEND_REAL_EMAILS=&quot;false&quot;
+LOCAL_XLSX=&quot;/Users/fort/Desktop/mon-business/06-leads/PROSPECTION_READY/01-BASE-EXCEL-A-UTILISER/leads-prospection-ready.xlsx&quot;
+REMOTE_XLSX=&quot;/opt/prospection-auto/data/leads-prospection-ready.xlsx&quot;
+REMOTE_DB=&quot;/opt/prospection-auto/campaign.db&quot;
+
+Crée deploy.env avec :
+VPS_IP=&quot;valeur extraite ou vide&quot;
+SSH_USER=&quot;valeur extraite ou root&quot;
+SSH_PORT=&quot;22&quot;
+SSH_KEY_PATH=&quot;valeur extraite ou ~/.ssh/blog-auto-codex&quot;
+REMOTE_DIR=&quot;/opt/prospection-auto&quot;
+LOCAL_PROJECT_DIR=&quot;.&quot;
+LOCAL_XLSX=&quot;/Users/fort/Desktop/mon-business/06-leads/PROSPECTION_READY/01-BASE-EXCEL-A-UTILISER/leads-prospection-ready.xlsx&quot;
+
+Ajoute dans .gitignore :
+00-colle-tout-ici.txt
+env
+.env
+deploy.env
+*.key
+*.pem
+__pycache__/
+.DS_Store
+
+Dans README-CONFIG.md, explique :
+- quoi coller dans 00-colle-tout-ici.txt
+- que Codex organise ensuite env et deploy.env
+- que les fichiers privés sont ignorés par Git
+- que les secrets ne doivent jamais être affichés
+- que le mot de passe Gmail doit être un mot de passe d&#x27;application
+- que SSH_PORT vaut 22 par défaut
+- que SSH_KEY_PATH peut rester ~/.ssh/blog-auto-codex si cette clé existe
+
+CONTRÔLE FINAL
+Vérifie que les quatre fichiers existent.
+Vérifie que .gitignore protège les fichiers privés.
+N&#x27;affiche aucun secret.
+Réponds seulement :
+&quot;Configuration organisée.
+Fichiers créés : env, deploy.env, README-CONFIG.md, .gitignore
+Champs trouvés : liste des noms de champs, sans valeurs
+Champs manquants : liste des noms de champs, sans valeurs
+Secrets affichés : non&quot;</code></pre></div></div></section><section id="section-35" class="section tone-6" data-section="35"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">35 · Fichiers</p><h2>35. Les fichiers attendus sont simples</h2><p>Je veux quatre fichiers : deux fichiers de configuration, un README d’usage, et un `.gitignore` qui protège tout ce qui est privé.</p></div><figure class="media contain reveal"><img src="assets/screenshots/09-config-fichiers-env.jpg" alt="Le dossier contient `env`, `deploy.env`, `README-CONFIG.md` et `.gitignore`." loading="lazy"><figcaption>Le dossier contient `env`, `deploy.env`, `README-CONFIG.md` et `.gitignore`.</figcaption></figure></div></section><section id="section-36" class="section tone-1" data-section="36"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">36 · env</p><h2>36. `env` sert à l’application</h2><p>Ce fichier contient les variables du moteur : OpenAI, Gmail, limites, fenêtre d’envoi, contexte business, offre et mode dry-run.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Variable</th><th>Rôle</th></tr></thead><tbody><tr><td>OPENAI_API_KEY</td><td>Rédaction des emails</td></tr><tr><td>GMAIL_EMAIL</td><td>Compte expéditeur</td></tr><tr><td>DAILY_SEND_LIMIT</td><td>Cadence maximale</td></tr><tr><td>BUSINESS_CONTEXT</td><td>Contexte commercial</td></tr><tr><td>DRY_RUN</td><td>Protection avant envoi réel</td></tr></tbody></table></div></div></section><section id="section-37" class="section tone-2" data-section="37"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">37 · deploy</p><h2>37. `deploy.env` sert au déploiement</h2><p>Ce fichier contient l’accès serveur : IP, utilisateur SSH, port, chemin de clé, dossier distant, chemin du XLSX local.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Variable</th><th>Rôle</th></tr></thead><tbody><tr><td>VPS_IP</td><td>Adresse du serveur</td></tr><tr><td>SSH_USER</td><td>Utilisateur</td></tr><tr><td>SSH_PORT</td><td>Port, souvent 22</td></tr><tr><td>SSH_KEY_PATH</td><td>Clé privée locale</td></tr><tr><td>REMOTE_DIR</td><td>Dossier de production</td></tr></tbody></table></div></div></section><section id="section-38" class="section tone-3" data-section="38"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">38 · Validation</p><h2>38. Je vérifie que Codex ne montre pas les secrets</h2><p>La bonne sortie liste les champs trouvés ou manquants. Elle ne donne pas les valeurs. C’est ce que je veux voir avant d’aller plus loin.</p></div><figure class="media contain reveal"><img src="assets/screenshots/14-config-secrets-hidden.jpg" alt="Les valeurs sensibles restent cachées." loading="lazy"><figcaption>Les valeurs sensibles restent cachées.</figcaption></figure></div></section><section id="section-39" class="section tone-4" data-section="39"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">39 · Nettoyage</p><h2>39. Je nettoie le fichier temporaire</h2><p>Une fois `env` et `deploy.env` remplis, je demande à Codex de supprimer le fichier texte temporaire et de garder un système réutilisable.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Organise les fichiers env.
+Supprime le fichier txt stp.
+Je veux que tu puisses constamment te connecter au VPS sans me demander.</code></pre></div></div></section><section id="section-40" class="section tone-5" data-section="40"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">40 · Routine</p><h2>40. Je garde la configuration dans le dossier de session</h2><p>L’intérêt est simple : plus tard, je peux rouvrir le dossier, relancer Codex et lui demander d’ajouter des leads ou de modifier une règle sans tout refaire.</p></div><div class="cards reveal"><article class="card"><b>Même dossier</b><p>Même dossier</p></article><article class="card"><b>Même config</b><p>Même config</p></article><article class="card"><b>Même VPS</b><p>Même VPS</p></article><article class="card"><b>Même base logique</b><p>Même base logique</p></article><article class="card"><b>Maintenance rapide</b><p>Maintenance rapide</p></article></div></div></section><section id="section-41" class="section tone-6" data-section="41"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">41 · Précheck</p><h2>41. Je teste les connexions avant de déployer</h2><p>OpenAI, Gmail SMTP, Gmail IMAP et SSH doivent répondre. Si SSH bloque, je corrige la clé ou le chemin avant de continuer.</p></div><figure class="media contain reveal"><img src="assets/screenshots/15-connexion-tests.jpg" alt="Le test confirme OpenAI, SMTP et IMAP ; SSH peut bloquer si la clé locale manque." loading="lazy"><figcaption>Le test confirme OpenAI, SMTP et IMAP ; SSH peut bloquer si la clé locale manque.</figcaption></figure></div></section><section id="section-42" class="section tone-1" data-section="42"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">42 · Diagnostic</p><h2>42. Je ne panique pas si SSH bloque</h2><p>Dans la séance, le blocage vient d’un chemin de clé configuré qui ne pointe pas vers un fichier existant localement. Le bon réflexe : corriger la config, pas bricoler le serveur.</p></div><div class="cards reveal"><article class="card"><b>Vérifier SSH_KEY_PATH</b><p>Vérifier SSH_KEY_PATH</p></article><article class="card"><b>Vérifier permissions de clé</b><p>Vérifier permissions de clé</p></article><article class="card"><b>Vérifier user root</b><p>Vérifier user root</p></article><article class="card"><b>Vérifier IP VPS</b><p>Vérifier IP VPS</p></article><article class="card"><b>Relancer un test sans afficher de secret</b><p>Relancer un test sans afficher de secret</p></article></div></div></section><section id="section-43" class="section tone-2" data-section="43"><div class="wrap layout layout-prompt"><div class="section-copy reveal"><p class="kicker">43 · Prompt</p><h2>43. Prompt à copier : préparer le VPS</h2><p>Ce prompt copie la base et la config, crée l’arborescence distante et protège `.env`.</p></div><div class="prompt-card reveal"><div class="prompt-head"><span>Prompt à copier</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Tu es Codex. Déploie la base et la configuration sur le VPS sans afficher les secrets.
+
+FICHIERS LOCAUX
+CONFIG_DIR=&quot;$(pwd)&quot;
+LOCAL_ENV=&quot;$CONFIG_DIR/env&quot;
+LOCAL_DEPLOY_ENV=&quot;$CONFIG_DIR/deploy.env&quot;
+LOCAL_XLSX=&quot;/Users/fort/Desktop/mon-business/06-leads/PROSPECTION_READY/01-BASE-EXCEL-A-UTILISER/leads-prospection-ready.xlsx&quot;
+
+RÈGLES DE SÉCURITÉ
+- Ne fais jamais cat env.
+- Ne fais jamais cat deploy.env.
+- Ne fais jamais cat .env sur le VPS.
+- Ne log jamais OPENAI_API_KEY.
+- Ne log jamais GMAIL_APP_PASSWORD.
+- Vérifie seulement l&#x27;existence et la taille des fichiers.
+- Ne lance aucun envoi email pendant cette étape.
+
+MISSION
+1. Vérifie que LOCAL_XLSX existe et n&#x27;est pas vide.
+2. Lis uniquement les variables nécessaires depuis deploy.env sans les afficher.
+3. Teste la connexion SSH au VPS.
+4. Crée REMOTE_DIR sur le VPS, par défaut /opt/prospection-auto.
+5. Crée cette structure :
+   /opt/prospection-auto/app
+   /opt/prospection-auto/data
+   /opt/prospection-auto/logs
+   /opt/prospection-auto/exports
+   /opt/prospection-auto/tracking
+   /opt/prospection-auto/backups
+6. Copie env vers /opt/prospection-auto/.env.
+7. Mets chmod 600 sur /opt/prospection-auto/.env.
+8. Copie leads-prospection-ready.xlsx vers /opt/prospection-auto/data/leads-prospection-ready.xlsx.
+9. Mets chmod 640 sur le XLSX.
+10. Crée /opt/prospection-auto/DEPLOY_CHECK.md sans secret.
+
+DEPLOY_CHECK.md doit contenir :
+- date du déploiement
+- chemin du XLSX local
+- chemin du XLSX distant
+- taille du XLSX distant
+- existence de .env sans contenu
+- version Python disponible sur le VPS
+- résultat du test SSH
+
+MESSAGE FINAL
+Réponds seulement :
+&quot;Déploiement VPS préparé.
+Remote dir : /opt/prospection-auto
+XLSX copié : oui/non
+.env copié : oui/non
+Secrets affichés : non
+Prochaine étape : build du système.&quot;</code></pre></div></div></section><section id="section-44" class="section tone-3" data-section="44"><div class="wrap layout layout-flow"><div class="section-copy reveal"><p class="kicker">44 · Serveur</p><h2>44. L’arborescence VPS reste lisible</h2><p>Le serveur reçoit un dossier clair : `app`, `data`, `logs`, `exports`, `tracking`, `backups`. Pas de fichiers dispersés.</p></div><div class="flow reveal"><span>/opt/prospection-auto</span><span>app</span><span>data</span><span>logs</span><span>exports</span><span>tracking</span><span>backups</span></div></div></section><section id="section-45" class="section tone-4" data-section="45"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">45 · Data</p><h2>45. Je copie la base au bon endroit</h2><p>Le XLSX local devient `/opt/prospection-auto/data/leads-prospection-ready.xlsx`. Le moteur lit ce fichier, pas le dossier complet.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>LOCAL_XLSX=&quot;.../leads-prospection-ready.xlsx&quot;
+REMOTE_XLSX=&quot;/opt/prospection-auto/data/leads-prospection-ready.xlsx&quot;</code></pre></div></div></section><section id="section-46" class="section tone-5" data-section="46"><div class="wrap layout layout-check"><div class="section-copy reveal"><p class="kicker">46 · Permissions</p><h2>46. Je protège `.env` sur le VPS</h2><p>Le fichier `.env` distant doit exister mais rester fermé : `chmod 600`. Codex vérifie l’existence et la taille, jamais le contenu.</p></div><ul class="checklist reveal"><li><span>01</span><p>Ne jamais `cat .env`</p></li><li><span>02</span><p>Ne jamais logger OPENAI_API_KEY</p></li><li><span>03</span><p>Ne jamais logger GMAIL_APP_PASSWORD</p></li><li><span>04</span><p>Vérifier seulement existence + taille</p></li></ul></div></section><section id="section-47" class="section tone-6" data-section="47"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">47 · Rapport</p><h2>47. Le déploiement préparé doit être explicite</h2><p>Je veux un `DEPLOY_CHECK.md` sans secret : date, chemins, taille du XLSX, version Python et résultat SSH.</p></div><div class="cards reveal"><article class="card"><b>date du déploiement</b><p>date du déploiement</p></article><article class="card"><b>chemin XLSX local</b><p>chemin XLSX local</p></article><article class="card"><b>chemin XLSX distant</b><p>chemin XLSX distant</p></article><article class="card"><b>taille du fichier distant</b><p>taille du fichier distant</p></article><article class="card"><b>existence de .env</b><p>existence de .env</p></article><article class="card"><b>version Python</b><p>version Python</p></article></div></div></section><section id="section-48" class="section tone-1" data-section="48"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">48 · Résultat</p><h2>48. Le VPS est prêt pour le build</h2><p>Une fois le déploiement préparé, je peux passer à la construction du moteur sans me demander si les fichiers sont au bon endroit.</p></div><figure class="media contain reveal"><img src="assets/screenshots/16-deploiement-vps-pret.jpg" alt="Le terminal confirme le déploiement préparé." loading="lazy"><figcaption>Le terminal confirme le déploiement préparé.</figcaption></figure></div></section><section id="section-49" class="section tone-2" data-section="49"><div class="wrap layout layout-quote"><div class="section-copy reveal"><p class="kicker">49 · Transition</p><h2>49. La prochaine étape n’est pas encore l’envoi</h2><p>Même après le déploiement, je n’envoie rien. Je dois construire le moteur, installer les dépendances, synchroniser les leads et tester.</p></div><blockquote class="quote reveal"><p>Déployer la base ne veut pas dire démarrer la campagne.</p></blockquote></div></section><section id="section-50" class="section tone-3" data-section="50"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">50 · Traçabilité</p><h2>50. Je garde un système auditable</h2><p>Chaque étape produit un rapport : audit du fichier, configuration, déploiement, build. Si un client demande ce qui a été fait, je peux répondre proprement.</p></div><div class="cards reveal"><article class="card"><b>audit-prospection-ready.md</b><p>audit-prospection-ready.md</p></article><article class="card"><b>README-CONFIG.md</b><p>README-CONFIG.md</p></article><article class="card"><b>DEPLOY_CHECK.md</b><p>DEPLOY_CHECK.md</p></article><article class="card"><b>BUILD_REPORT.md</b><p>BUILD_REPORT.md</p></article><article class="card"><b>outreach-tracking.xlsx</b><p>outreach-tracking.xlsx</p></article></div></div></section><section id="section-51" class="section tone-4" data-section="51"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">51 · Build</p><h2>51. Je construis le moteur Python</h2><p>Le prompt principal demande un vrai système : lecture XLSX, éligibilité, rédaction OpenAI, envoi Gmail, réponses IMAP, relances, SQLite, export.</p></div><figure class="media contain reveal"><img src="assets/screenshots/17-prompt-build-system.jpg" alt="Le prompt build est la pièce centrale du système." loading="lazy"><figcaption>Le prompt build est la pièce centrale du système.</figcaption></figure></div></section><section id="section-52" class="section tone-5" data-section="52"><div class="wrap layout layout-prompt"><div class="section-copy reveal"><p class="kicker">52 · Prompt</p><h2>52. Prompt à copier : système Gmail + OpenAI</h2><p>Ce prompt construit le moteur complet sur le VPS. Il est long parce qu’il verrouille les règles critiques.</p></div><div class="prompt-card reveal"><div class="prompt-head"><span>Prompt à copier</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Tu es Codex. Construis sur le VPS un système Python complet d&#x27;envoi automatique Gmail avec rédaction OpenAI et relances.
+
+OBJECTIF
+Créer un moteur de prospection qui :
+- lit /opt/prospection-auto/data/leads-prospection-ready.xlsx
+- choisit uniquement les prospects éligibles
+- demande à OpenAI de rédiger un nouveau mail
+- envoie réellement via Gmail SMTP
+- lit les réponses via Gmail IMAP
+- stoppe automatiquement les relances si réponse, bounce ou opt-out
+- limite les sorties à 10 emails maximum par jour
+- écrit tout le tracking dans SQLite et XLSX exportable
+
+RÈGLE ABSOLUE SUR LES MESSAGES
+Ne recopie jamais le message disponible dans le XLSX.
+Ne prends jamais outreach_message comme texte final.
+Le XLSX sert uniquement de contexte.
+Chaque email doit être réécrit de zéro par OpenAI.
+
+STYLE OBLIGATOIRE
+- très simple
+- amical
+- naturel
+- humain
+- court
+- sans jargon IA
+- sans promesse inventée
+- sans pression
+- sans fausse personnalisation
+- une seule idée
+- une seule question
+
+Phrase de sortie obligatoire dans le premier email :
+&quot;Si ce n&#x27;est pas pertinent, dites-moi simplement et je ne vous relance pas.&quot;
+
+ARBORESCENCE
+Travaille dans :
+/opt/prospection-auto
+
+Crée :
+- app/__init__.py
+- app/config.py
+- app/db.py
+- app/models.py
+- app/load_leads.py
+- app/eligibility.py
+- app/ai_writer.py
+- app/gmail_sender.py
+- app/reply_checker.py
+- app/suppression.py
+- app/tracking_export.py
+- app/run_campaign.py
+- requirements.txt
+- README.md
+- BUILD_REPORT.md
+- tests/test_eligibility.py
+- tests/test_ai_prompt_contract.py
+
+TECHNIQUE
+- Python 3
+- venv dans /opt/prospection-auto/.venv
+- pandas + openpyxl pour XLSX
+- sqlite3 pour campaign.db
+- python-dotenv pour /opt/prospection-auto/.env
+- smtplib pour smtp.gmail.com:587
+- imaplib pour imap.gmail.com:993
+- email.message.EmailMessage pour construire les emails
+- OpenAI API pour rédiger email initial et relances
+- logging avec masquage des emails et secrets
+
+CONFIG
+Lis uniquement /opt/prospection-auto/.env.
+Variables attendues :
+- OPENAI_API_KEY
+- OPENAI_MODEL
+- GMAIL_EMAIL
+- GMAIL_APP_PASSWORD
+- GMAIL_SENDER_NAME
+- SMTP_HOST
+- SMTP_PORT
+- IMAP_HOST
+- IMAP_PORT
+- DAILY_SEND_LIMIT
+- SEND_WINDOW_START
+- SEND_WINDOW_END
+- TIMEZONE
+- ALLOW_WEEKEND_SENDS
+- FOLLOWUP_1_DAYS
+- FOLLOWUP_2_DAYS
+- FOLLOWUP_3_DAYS
+- BUSINESS_CONTEXT
+- OFFER_SUMMARY
+- CALENDAR_LINK
+- TEST_RECIPIENT_EMAIL
+- DRY_RUN
+- SEND_REAL_EMAILS
+
+BASE SQLITE
+Crée campaign.db avec ces tables :
+- leads
+- messages
+- events
+- suppression_list
+- daily_counters
+- run_logs
+
+Table leads minimum :
+- lead_id_final
+- company_name
+- primary_email
+- domain
+- website
+- city
+- source_files
+- source_urls
+- final_class
+- quality_status
+- outreach_segment
+- final_next_action
+- campaign_status
+- opt_out_status
+- current_step
+- next_action_at
+- last_sent_at
+- replied_at
+- bounced_at
+- stopped_reason
+- raw_context_json
+
+Table messages minimum :
+- id
+- lead_id_final
+- step
+- subject
+- body
+- status
+- sent_at
+- gmail_message_id
+- error_message
+
+ÉLIGIBILITÉ
+Un lead peut recevoir un email seulement si :
+- primary_email existe
+- primary_email semble valide
+- quality_status vaut CLEAN_READY ou READY_WITH_WARNING
+- final_class vaut A+ ou A
+- campaign_status vaut draft, pending_review, pending ou vide
+- opt_out_status est vide
+- le lead n&#x27;est pas dans DO_NOT_CONTACT
+- le lead n&#x27;est pas dans suppression_list
+- il n&#x27;a pas déjà répondu
+- il n&#x27;a pas déjà bounced
+- il n&#x27;est pas marqué do_not_contact
+
+CADENCE
+- DAILY_SEND_LIMIT par défaut 10.
+- Ce plafond inclut emails initiaux et relances.
+- Priorité du jour : relances dues d&#x27;abord, nouveaux emails ensuite.
+- Pas d&#x27;envoi samedi/dimanche si ALLOW_WEEKEND_SENDS=false.
+- Stop immédiat si Gmail renvoie quota, auth error ou trop d&#x27;erreurs SMTP.
+
+SÉQUENCE
+- Email initial : J0
+- Relance 1 : J+3
+- Relance 2 : J+7
+- Relance 3 : J+14
+- Après relance 3, stop avec status finished_no_reply.
+
+RELANCES
+Chaque relance doit être un vrai nouveau message.
+Interdit :
+- &quot;up&quot;
+- &quot;je relance juste&quot;
+- copier-coller de l&#x27;email précédent
+- culpabiliser le prospect
+
+Relance 1 :
+- très courte
+- polie
+- rappelle le contexte en une phrase
+- question simple
+
+Relance 2 :
+- apporte un angle concret selon outreach_segment
+- donne un exemple d&#x27;usage plausible sans inventer de résultat
+
+Relance 3 :
+- dernier message propre
+- sortie élégante
+- aucune pression
+
+STOP AUTOMATIQUE
+Avant chaque envoi, lance check-replies.
+Stoppe le lead si :
+- réponse détectée
+- bounce détecté
+- opt-out détecté
+- mots-clés dans réponse : stop, désinscrire, ne me relancez pas, pas intéressé, unsubscribe, retirez-moi, suppression
+
+COMMANDES CLI
+Créer ces commandes :
+- python -m app.run_campaign --sync-leads
+- python -m app.run_campaign --audit-leads
+- python -m app.run_campaign --status
+- python -m app.run_campaign --send-test
+- python -m app.run_campaign --check-replies
+- python -m app.run_campaign --send-daily
+- python -m app.run_campaign --export-tracking
+- python -m app.run_campaign --dry-run
+
+DRY RUN
+Par défaut, DRY_RUN=true et SEND_REAL_EMAILS=false.
+Si DRY_RUN=true, le système rédige et logge, mais n&#x27;envoie pas.
+Pour envoyer réellement, il faut DRY_RUN=false et SEND_REAL_EMAILS=true.
+
+TEST RÉEL
+--send-test doit envoyer un vrai email uniquement à TEST_RECIPIENT_EMAIL.
+Il doit utiliser Gmail SMTP et OpenAI.
+Il ne doit jamais envoyer à un prospect pendant le test.
+
+CRON
+Prépare sans activer automatiquement :
+0 9 * * MON-FRI cd /opt/prospection-auto &amp;&amp; /opt/prospection-auto/.venv/bin/python -m app.run_campaign --send-daily &gt;&gt; /opt/prospection-auto/logs/cron.log 2&gt;&amp;1
+
+TESTS
+Ajoute des tests minimum pour :
+- exclure DO_NOT_CONTACT
+- exclure email vide
+- exclure opt_out
+- prioriser relances dues avant nouveaux emails
+- vérifier que le prompt IA interdit de copier le XLSX
+- vérifier que la limite DAILY_SEND_LIMIT est respectée
+
+LIVRABLE FINAL
+1. Installe requirements dans .venv.
+2. Lance les tests.
+3. Lance --sync-leads.
+4. Lance --audit-leads.
+5. Lance --status.
+6. Ne lance pas --send-daily.
+7. Écris BUILD_REPORT.md avec :
+   - fichiers créés
+   - commandes disponibles
+   - statut des tests
+   - nombre de leads importés
+   - nombre de leads éligibles
+   - prochaines commandes à lancer
+
+MESSAGE FINAL
+Réponds seulement :
+&quot;Système Gmail/OpenAI construit.
+Tests : OK ou détails
+Leads importés : X
+Leads éligibles : Y
+Mode actuel : DRY_RUN
+Envoi réel lancé : non
+Prochaine étape : send-test.&quot;</code></pre></div></div></section><section id="section-53" class="section tone-6" data-section="53"><div class="wrap layout layout-quote"><div class="section-copy reveal"><p class="kicker">53 · Règle message</p><h2>53. Je force OpenAI à réécrire</h2><p>Le fichier XLSX contient du contexte, pas le texte final. Chaque email doit être rédigé de zéro par OpenAI.</p></div><blockquote class="quote reveal"><p>Ne recopie jamais `outreach_message`. Le XLSX sert de contexte, pas de script final.</p></blockquote></div></section><section id="section-54" class="section tone-1" data-section="54"><div class="wrap layout layout-check"><div class="section-copy reveal"><p class="kicker">54 · Eligibility</p><h2>54. L’éligibilité protège la campagne</h2><p>Un lead ne peut partir que s’il remplit toutes les conditions : email valide, bon statut, bonne classe, pas d’opt-out, pas de réponse, pas de bounce.</p></div><ul class="checklist reveal"><li><span>01</span><p>primary_email existe</p></li><li><span>02</span><p>quality_status OK</p></li><li><span>03</span><p>final_class A+ ou A</p></li><li><span>04</span><p>campaign_status compatible</p></li><li><span>05</span><p>opt_out_status vide</p></li><li><span>06</span><p>pas dans suppression_list</p></li></ul></div></section><section id="section-55" class="section tone-2" data-section="55"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">55 · SQLite</p><h2>55. La base SQLite garde la mémoire</h2><p>Le moteur ne doit pas oublier ce qu’il a fait. SQLite garde les leads, les messages, les événements, les suppressions, les compteurs et les logs.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Table</th><th>Utilité</th></tr></thead><tbody><tr><td>leads</td><td>État de chaque prospect</td></tr><tr><td>messages</td><td>Email initial et relances</td></tr><tr><td>events</td><td>Historique des actions</td></tr><tr><td>suppression_list</td><td>Opt-out et exclusions</td></tr><tr><td>daily_counters</td><td>Limite quotidienne</td></tr><tr><td>run_logs</td><td>Logs d’exécution</td></tr></tbody></table></div></div></section><section id="section-56" class="section tone-3" data-section="56"><div class="wrap layout layout-flow"><div class="section-copy reveal"><p class="kicker">56 · Priorité</p><h2>56. Les relances passent avant les nouveaux emails</h2><p>Chaque jour, le moteur traite d’abord les relances dues, puis seulement les nouveaux leads. Sinon les suivis deviennent incohérents.</p></div><div class="flow reveal"><span>check-replies</span><span>relances dues</span><span>nouveaux emails</span><span>export tracking</span><span>logs</span></div></div></section><section id="section-57" class="section tone-4" data-section="57"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">57 · Timeline</p><h2>57. La séquence est simple</h2><p>Email initial à J0, relance à J+3, nouvel angle à J+7, dernier message à J+14. Après, on stoppe proprement.</p></div><div class="timeline reveal"><article><span>1</span><p>J0 : email initial</p></article><article><span>2</span><p>J+3 : rappel léger</p></article><article><span>3</span><p>J+7 : nouvel angle</p></article><article><span>4</span><p>J+14 : dernier message</p></article><article><span>5</span><p>Fin : finished_no_reply</p></article></div></div></section><section id="section-58" class="section tone-5" data-section="58"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">58 · Stop</p><h2>58. Les réponses stoppent tout</h2><p>Avant chaque envoi, le système vérifie Gmail IMAP. Une réponse, un bounce ou un opt-out arrête les relances.</p></div><div class="cards reveal"><article class="card"><b>Réponse détectée</b><p>Réponse détectée</p></article><article class="card"><b>Bounce détecté</b><p>Bounce détecté</p></article><article class="card"><b>Mot-clé opt-out</b><p>Mot-clé opt-out</p></article><article class="card"><b>Statut do_not_contact</b><p>Statut do_not_contact</p></article><article class="card"><b>Suppression list</b><p>Suppression list</p></article></div></div></section><section id="section-59" class="section tone-6" data-section="59"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">59 · Dry run</p><h2>59. Le dry-run protège le lancement</h2><p>Par défaut, `DRY_RUN=true` et `SEND_REAL_EMAILS=false`. Le moteur peut rédiger et logger sans envoyer aux prospects.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Mode</th><th>Effet</th></tr></thead><tbody><tr><td>DRY_RUN=true</td><td>Rédige et logge sans envoyer</td></tr><tr><td>SEND_REAL_EMAILS=false</td><td>Bloque l’envoi réel</td></tr><tr><td>--send-test</td><td>Envoie seulement à TEST_RECIPIENT_EMAIL</td></tr><tr><td>--send-daily</td><td>Envoi réel si flags activés</td></tr></tbody></table></div></div></section><section id="section-60" class="section tone-1" data-section="60"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">60 · CLI</p><h2>60. Les commandes CLI rendent le système pilotable</h2><p>Je veux des commandes simples pour synchroniser, auditer, tester, vérifier les réponses, envoyer et exporter le tracking.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>python -m app.run_campaign --sync-leads
+python -m app.run_campaign --audit-leads
+python -m app.run_campaign --status
+python -m app.run_campaign --send-test
+python -m app.run_campaign --check-replies
+python -m app.run_campaign --send-daily
+python -m app.run_campaign --export-tracking</code></pre></div></div></section><section id="section-61" class="section tone-2" data-section="61"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">61 · Test réel</p><h2>61. Je teste d’abord sur moi</h2><p>Le test réel part uniquement vers `TEST_RECIPIENT_EMAIL`. Il valide Gmail SMTP et OpenAI sans toucher les prospects.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>cd /opt/prospection-auto
+/opt/prospection-auto/.venv/bin/python -m app.run_campaign --send-test</code></pre></div></div></section><section id="section-62" class="section tone-3" data-section="62"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">62 · Contrôle qualité</p><h2>62. Un système qui envoie peut encore être mauvais</h2><p>Dans la séance, l’email part bien. Mais le message est faible : il parle de privatisation et groupes sans contexte clair. Je ne valide pas ça.</p></div><figure class="media contain reveal"><img src="assets/screenshots/18-gmail-test-first-email.jpg" alt="Le premier email fonctionne techniquement, mais le style ne suffit pas." loading="lazy"><figcaption>Le premier email fonctionne techniquement, mais le style ne suffit pas.</figcaption></figure></div></section><section id="section-63" class="section tone-4" data-section="63"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">63 · Relecture</p><h2>63. Je lis le mail comme un prospect</h2><p>Je ne regarde pas seulement si Gmail a reçu le message. Je me demande : est-ce que je répondrais ? Est-ce que je comprends ? Est-ce que le ton est humain ?</p></div><div class="cards reveal"><article class="card"><b>Compréhension immédiate</b><p>Compréhension immédiate</p></article><article class="card"><b>Phrase courte</b><p>Phrase courte</p></article><article class="card"><b>Une seule question</b><p>Une seule question</p></article><article class="card"><b>Pas de jargon</b><p>Pas de jargon</p></article><article class="card"><b>Pas de pression</b><p>Pas de pression</p></article></div></div></section><section id="section-64" class="section tone-5" data-section="64"><div class="wrap layout layout-compare"><div class="section-copy reveal"><p class="kicker">64 · Erreur fréquente</p><h2>64. Je refuse la phrase molle</h2><p>La phrase “je me permets de vous écrire au sujet de...” sonne générique. Je veux un message direct, clair, amical.</p></div><div class="table-wrap reveal"><table><thead><tr><th>À éviter</th><th>À viser</th></tr></thead><tbody><tr><td>Je me permets de vous écrire au sujet de...</td><td>Bonjour, je travaille sur un sujet simple : mieux traiter [douleur].</td></tr><tr><td>Un paragraphe compact</td><td>Des lignes courtes</td></tr><tr><td>Question floue</td><td>Une question simple</td></tr></tbody></table></div></div></section><section id="section-65" class="section tone-6" data-section="65"><div class="wrap layout layout-prompt"><div class="section-copy reveal"><p class="kicker">65 · Prompt</p><h2>65. Prompt à copier : corriger le style</h2><p>Ce prompt sert quand l’email est envoyé mais ne convertira pas. Je garde le système, je corrige le cerveau rédactionnel.</p></div><div class="prompt-card reveal"><div class="prompt-head"><span>Prompt à copier</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Faut que ce soit bien plus court et structuré.
+Saute des lignes.
+Je veux que le message soit plus amical et plus transparent.
+Je ne veux pas de phrase lourde du type : &quot;Je me permets de vous écrire au sujet de la privatisation et des groupes&quot;.
+
+Objectif :
+- comprendre la ligne complète du fichier XLSX
+- parler du vrai sujet du lead
+- faire un email court
+- garder une seule question simple
+- éviter le ton commercial
+- garder la phrase de sortie : &quot;Si ce n&#x27;est pas pertinent, dites-moi simplement et je ne vous relance pas.&quot;
+
+Relance un test sur le troisième lead éligible.</code></pre></div></div></section><section id="section-66" class="section tone-1" data-section="66"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">66 · Pilotage</p><h2>66. Je challenge Codex comme un directeur commercial</h2><p>C’est toi le boss. Codex exécute, mais tu décides du ton, de la stratégie, de la question et du niveau de pression.</p></div><figure class="media contain reveal"><img src="assets/screenshots/19-correction-style-email.jpg" alt="Le terminal reçoit une demande de correction de style." loading="lazy"><figcaption>Le terminal reçoit une demande de correction de style.</figcaption></figure></div></section><section id="section-67" class="section tone-2" data-section="67"><div class="wrap layout layout-quote"><div class="section-copy reveal"><p class="kicker">67 · Itération</p><h2>67. Les phases d’ajustement sont normales</h2><p>Passer 10 ou 15 minutes à corriger le message est rentable. Un mauvais email répété tous les jours crée un mauvais système tous les jours.</p></div><blockquote class="quote reveal"><p>Le plus important n’est pas que ça parte. Le plus important, c’est que ça donne envie de répondre.</p></blockquote></div></section><section id="section-68" class="section tone-3" data-section="68"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">68 · Nouveau test</p><h2>68. Je teste un troisième lead</h2><p>Je ne corrige pas en théorie. Je relance un test sur un autre lead éligible pour vérifier que la personnalisation tient sur plusieurs lignes.</p></div><div class="cards reveal"><article class="card"><b>Changer de lead test</b><p>Changer de lead test</p></article><article class="card"><b>Comparer le sujet</b><p>Comparer le sujet</p></article><article class="card"><b>Regarder la longueur</b><p>Regarder la longueur</p></article><article class="card"><b>Vérifier la question</b><p>Vérifier la question</p></article><article class="card"><b>Relire la phrase de sortie</b><p>Relire la phrase de sortie</p></article></div></div></section><section id="section-69" class="section tone-4" data-section="69"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">69 · Résultat</p><h2>69. Le bon email respire</h2><p>La version améliorée est plus courte, plus aérée, plus concrète. Elle parle d’un sujet que le lead peut comprendre rapidement.</p></div><figure class="media contain reveal"><img src="assets/screenshots/20-gmail-email-improved.jpg" alt="Le deuxième email est plus lisible et plus amical." loading="lazy"><figcaption>Le deuxième email est plus lisible et plus amical.</figcaption></figure></div></section><section id="section-70" class="section tone-5" data-section="70"><div class="wrap layout layout-prompt"><div class="section-copy reveal"><p class="kicker">70 · Prompt</p><h2>70. Prompt à copier : renforcer la pipeline</h2><p>Quand le style est presque bon, je pousse le système vers une vraie pipeline de prospection : prise de RDV ou question simple selon la stratégie.</p></div><div class="prompt-card reveal"><div class="prompt-head"><span>Prompt à copier</span><button class="copy-btn" type="button">Copier</button></div><pre><code>Améliore le système de prompting pour créer une vraie pipeline de prospection.
+Je veux des messages qui donnent envie de répondre, pas seulement des messages techniquement corrects.
+
+Contraintes :
+- email initial très court
+- 1 idée par email
+- ton humain et direct
+- pas de promesse inventée
+- pas de jargon IA
+- si mon lien calendrier existe, propose-le seulement quand le message le justifie
+- sinon garde une question simple pour démarrer l&#x27;échange
+
+Relance un test et montre-moi uniquement le résultat utile, sans afficher de secret.</code></pre></div></div></section><section id="section-71" class="section tone-6" data-section="71"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">71 · Exigence</p><h2>71. Je ne me satisfais pas d’une automatisation moyenne</h2><p>Le système était fonctionnel, mais les messages ne convertissaient pas assez. Je l’améliore au lieu de cocher “terminé”.</p></div><figure class="media contain reveal"><img src="assets/screenshots/21-ameliorer-pas-se-satisfaire.jpg" alt="La correction finale vient de l’exigence commerciale, pas du code." loading="lazy"><figcaption>La correction finale vient de l’exigence commerciale, pas du code.</figcaption></figure></div></section><section id="section-72" class="section tone-1" data-section="72"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">72 · Suivi</p><h2>72. Le tracking doit rester exportable</h2><p>Je veux pouvoir ouvrir un fichier de tracking et voir ce qui est parti, qui a répondu, qui est stoppé, et quel compteur reste disponible.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Champ</th><th>Pourquoi</th></tr></thead><tbody><tr><td>lead_id_final</td><td>Retrouver le prospect</td></tr><tr><td>step</td><td>Initial ou relance</td></tr><tr><td>sent_at</td><td>Historique</td></tr><tr><td>status</td><td>Succès ou erreur</td></tr><tr><td>stopped_reason</td><td>Pourquoi on arrête</td></tr><tr><td>daily_count</td><td>Respect du plafond</td></tr></tbody></table></div></div></section><section id="section-73" class="section tone-2" data-section="73"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">73 · Planification</p><h2>73. Le cron est préparé, pas activé à l’aveugle</h2><p>Je prépare la commande cron, mais je ne la lance qu’après validation du mode réel, des tests et du style email.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>0 9 * * MON-FRI cd /opt/prospection-auto &amp;&amp; /opt/prospection-auto/.venv/bin/python -m app.run_campaign --send-daily &gt;&gt; /opt/prospection-auto/logs/cron.log 2&gt;&amp;1</code></pre></div></div></section><section id="section-74" class="section tone-3" data-section="74"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">74 · Activation</p><h2>74. Le mode réel se déclenche volontairement</h2><p>Pour passer en production, je change deux flags. Ce double verrou évite de déclencher une campagne par accident.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Variable</th><th>Avant test</th><th>Production</th></tr></thead><tbody><tr><td>DRY_RUN</td><td>true</td><td>false</td></tr><tr><td>SEND_REAL_EMAILS</td><td>false</td><td>true</td></tr></tbody></table></div></div></section><section id="section-75" class="section tone-4" data-section="75"><div class="wrap layout layout-command"><div class="section-copy reveal"><p class="kicker">75 · Run</p><h2>75. La commande quotidienne reste simple</h2><p>Une fois prêt, le moteur peut envoyer la journée. La limite quotidienne et les relances dues restent gérées par le code.</p></div><div class="code-card reveal"><div class="prompt-head"><span>Commande / consigne</span><button class="copy-btn" type="button">Copier</button></div><pre><code>cd /opt/prospection-auto
+/opt/prospection-auto/.venv/bin/python -m app.run_campaign --send-daily</code></pre></div></div></section><section id="section-76" class="section tone-5" data-section="76"><div class="wrap layout layout-cards"><div class="section-copy reveal"><p class="kicker">76 · Client</p><h2>76. Je sais vendre la maintenance</h2><p>Un client veut ajouter des leads ou changer le ton ? Je rouvre le dossier, je lance Codex, et je modifie le système sans repartir de zéro.</p></div><div class="cards reveal"><article class="card"><b>Ajouter des leads</b><p>Ajouter des leads</p></article><article class="card"><b>Changer l’offre</b><p>Changer l’offre</p></article><article class="card"><b>Modifier le ton</b><p>Modifier le ton</p></article><article class="card"><b>Brancher un autre Gmail</b><p>Brancher un autre Gmail</p></article><article class="card"><b>Changer la limite quotidienne</b><p>Changer la limite quotidienne</p></article></div></div></section><section id="section-77" class="section tone-6" data-section="77"><div class="wrap layout layout-image"><div class="section-copy reveal"><p class="kicker">77 · Finalisation</p><h2>77. Le système est maintenant planifié</h2><p>La fin de séance montre le système prêt à tourner : tests, sécurité, API, Gmail, VPS, planification.</p></div><figure class="media contain reveal"><img src="assets/screenshots/22-planification-finale.jpg" alt="Le terminal confirme la préparation finale." loading="lazy"><figcaption>Le terminal confirme la préparation finale.</figcaption></figure></div></section><section id="section-78" class="section tone-1" data-section="78"><div class="wrap layout layout-check"><div class="section-copy reveal"><p class="kicker">78 · Synthèse</p><h2>78. Ce que tu dois retenir</h2><p>La compétence n’est pas “envoyer des emails”. La compétence, c’est cadrer une automatisation complète, la sécuriser, la tester et l’améliorer jusqu’à ce qu’elle soit utile.</p></div><ul class="checklist reveal"><li><span>01</span><p>Un fichier officiel</p></li><li><span>02</span><p>Un audit bloquant</p></li><li><span>03</span><p>Des secrets protégés</p></li><li><span>04</span><p>Un VPS structuré</p></li><li><span>05</span><p>Un moteur testable</p></li><li><span>06</span><p>Des emails corrigés</p></li><li><span>07</span><p>Un tracking clair</p></li></ul></div></section><section id="section-79" class="section tone-2" data-section="79"><div class="wrap layout layout-table"><div class="section-copy reveal"><p class="kicker">79 · Pièges</p><h2>79. Les erreurs fréquentes à éviter</h2><p>La plupart des problèmes viennent d’un mauvais dossier, d’un secret affiché, d’un email moyen ou d’un cron lancé trop tôt.</p></div><div class="table-wrap reveal"><table><thead><tr><th>Erreur</th><th>Correction</th></tr></thead><tbody><tr><td>Lancer Codex au mauvais endroit</td><td>Vérifier le dossier courant</td></tr><tr><td>Coller les secrets dans le prompt</td><td>Utiliser un fichier local privé</td></tr><tr><td>Envoyer après un seul test</td><td>Tester plusieurs leads</td></tr><tr><td>Accepter un email faible</td><td>Corriger le style</td></tr><tr><td>Activer le cron trop vite</td><td>Garder dry-run puis basculer</td></tr></tbody></table></div></div></section><section id="section-80" class="section tone-3" data-section="80"><div class="wrap"><div class="final-card reveal"><h2>80. La machine est prête, mais je garde le contrôle</h2><p>À la fin, tu as une méthode réutilisable : audit, config, déploiement, build, test, correction, production. C’est une base solide pour créer des systèmes IA facturables.</p><ul><li>Je sais partir d’une base XLSX propre</li><li>Je sais préparer Gmail/OpenAI/VPS</li><li>Je sais demander un moteur Python complet</li><li>Je sais tester sans envoyer aux prospects</li><li>Je sais corriger le message avant production</li></ul></div></div></section>
+</main>
+<footer class="footer"><div class="wrap"><p>Séance 19 — support généré depuis la transcription complète, avec captures locales de la séance et prompts copiables. Aucun secret n’est publié.</p></div></footer>
+<script>
+const progress=document.getElementById('progress');
+function onScroll(){const h=document.documentElement;progress.style.width=((h.scrollTop/(h.scrollHeight-h.clientHeight))*100)+'%';}
+document.addEventListener('scroll',onScroll);onScroll();
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.copy-btn').forEach(btn=>{btn.addEventListener('click',async()=>{const block=btn.closest('.prompt-card,.code-card');const text=block?block.querySelector('code').innerText:'';try{await navigator.clipboard.writeText(text);btn.classList.add('copied');btn.textContent='Copié';setTimeout(()=>{btn.classList.remove('copied');btn.textContent='Copier'},1300)}catch(e){btn.textContent='Copie manuelle';}})});
+</script>
+</body>
+</html>
